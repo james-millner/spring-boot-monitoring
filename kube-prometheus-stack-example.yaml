@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-spring-boot-application
+spec:
+  selector:
+    matchLabels:
+      name: my-spring-boot-application
+  template:
+    metadata:
+      labels:
+        name: my-spring-boot-application
+        app: my-spring-boot-application
+    spec:
+      containers:
+        - name: my-spring-boot-application
+          image: jmillnerdev/spring-boot-monitoring
+          ports:
+            - name: metrics
+              containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-spring-boot-application-monitoring
+  labels:
+    app: my-spring-boot-application-monitoring
+spec:
+  ports:
+    - name: metrics
+      port: 8081
+      targetPort: metrics
+  selector:
+    name: my-spring-boot-application
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: my-spring-boot-application-monitoring
+  labels:
+    prometheus: k8s
+spec:
+  jobLabel: my-spring-boot-application-monitoring
+  selector:
+    matchLabels:
+      app: my-spring-boot-application-monitoring
+  endpoints:
+    - port: metrics
+      interval: 10s
+      path: /actuator/prometheus
+      scheme: http

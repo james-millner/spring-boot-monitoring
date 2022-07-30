@@ -1,0 +1,9 @@
+management:
+  server:
+    port: 8081
+  endpoints:
+    prometheus:
+      enabled: true
+    web:
+      exposure:
+        include: ["*"]
