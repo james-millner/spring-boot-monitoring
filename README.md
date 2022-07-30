@@ -20,3 +20,8 @@ and then hit
 `curl localhost:8081/actuator/prometheus`
 
 
+### Notes
+
+Please note, this repo uses [JIB](https://github.com/GoogleContainerTools/jib) to create its docker image. Its also hard coded 
+at the moment to build ARM images. See `build.gradle.kts` for more details
+
