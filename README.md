@@ -7,9 +7,13 @@ docker hub image can be found publically at:
 
 [https://hub.docker.com/r/jmillnerdev/spring-boot-monitoring](https://hub.docker.com/r/jmillnerdev/spring-boot-monitoring)
 
+### Running Locally
+
+You'll need JDK 17 to run this project. I'd recommend checking out [ASDF](https://asdf-vm.com/) to get the appropriate version.
+
 To test this out, simply run:
 
-`gradle bootRun`
+`./gradlew bootRun`
 
 and then hit
 
